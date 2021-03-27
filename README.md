@@ -1,4 +1,6 @@
 # Inventory
+<img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/banner.png' />
+
 <p>Aplikasi sistem inventory sederhana dengan laravel dan tailwindcss </p>
 
 ![]('https://img.shields.io/badge/Language-PHP-blue?style=for-the-badge') ![]('https://img.shields.io/badge/Style-Tailwindcss-lime?style=for-the-badge')
