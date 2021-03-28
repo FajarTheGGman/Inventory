@@ -28,6 +28,7 @@ Jalankan File 'jalankan.bat'
 - Input Barang
 - Edit Barang
 - Delete Barang
+- Export Excel
 - Pagination
 - Ganti Password
 - Ganti Role
