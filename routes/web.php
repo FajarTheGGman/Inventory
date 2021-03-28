@@ -58,6 +58,10 @@ Route::get('/profile', [Profile::class, 'Profile']);
 Route::get('/dashboard', [Home::class, 'Home']);
 Route::get('/semuabarang', [Home::class, 'SemuaBarang']);
 
+// Excel
+Route::get('/semuabarang/excel', [Home::class, 'DownloadExcel']);
+Route::post('/semuabarang/import', [Home::class, 'AmbilFile']);
+
 // Route untuk views admin
 Route::get('/admin/edit', [AdminController::class, 'EditUser']);
 Route::get('/admin/delete', [AdminController::class, 'DeleteUser']);

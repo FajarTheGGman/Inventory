@@ -1,7 +1,15 @@
 @extends('template.app')
 
 @section('body')
-        <div class='flex flex-col mt-10 place-self-center shadow-xl rounded-xl bg-white'>
+        <div class='flex flex-col mt-10 place-self-center shadow-xl rounded-xl bg-white p-5'>
+            @if( $opsi->count() == 0 )
+                @if( $role == 'admin' )
+                    <strong class='text-center mt-2 text-red-800'>Isi form master data terlebih dahulu !</strong>
+                    <a href='/admin/masterdata' class='flex bg-green-700 rounded-xl place-self-center mt-2 text-white p-2'>Master Data</a>
+                @else
+                    <strong class='text-center mt-2 text-red-800'>Master Data Kosong!, silahkan login sebagai admin dan isi master data</strong>
+                @endif
+            @else
             <div class='p-10'>
                 <div class='flex flex-col justify-center items-center'>
                     <img src='/icons/crud/input.png' class='w-14'/>
@@ -44,5 +52,6 @@
 
                 </form>
             </div>
+        @endif
         </div>
 @endsection

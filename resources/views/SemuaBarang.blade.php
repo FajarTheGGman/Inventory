@@ -10,6 +10,18 @@
 
         @if( $total_data == 0 )
             <h1 class='text-center text-red-700 text-xl mt-10'>Barang Tidak Ditemukan</h1>
+            <div class='flex flex-col items-center mt-5'>
+                <a href='/input' class='bg-green-600 p-2 text-white rounded-xl'>Input Barang</a>
+            </div>
+            
+<!---            <p class='text-center mt-5'>Atau</p>
+
+            <form action='/semuabarang/import' method='post' enctype='multipart/form-data' class='flex flex-col'>
+                @csrf
+                <label for='file' class='bg-yellow-600 text-center cursor-pointer text-white rounded-xl p-2 mt-5 flex place-self-center'>Import Excel</label>
+                <input id='file' name='file' type='file' class='hidden' />
+                <button type='submit' class='mt-3 bg-green-600 text-white rounded-xl p-2 '>Upload</button>
+                </form> --->
         @else
             <form action='/search' method='get' class='flex flex-col items-center justify-center'>
                 @csrf
@@ -43,7 +55,10 @@
             </form>
 
             <div class='bg-local'>
-                <a href='/input' class='ml-5 bg-blue-700 text-white p-2 rounded-xl'>Tambah Data</a>
+                <div class='flex flex-row justify-between'>
+                    <a href='/input' class='ml-5 bg-blue-700 text-white p-2 rounded-xl'>Tambah Data</a>
+                    <a href='/semuabarang/excel' class='bg-green-600 rounded-xl p-2 text-white '>Download Excel</a>
+                </div>
                 <table class='table-auto mt-5'>
                     <thead>
                         <tr>

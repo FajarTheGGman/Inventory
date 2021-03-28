@@ -26,10 +26,12 @@ class InputController extends Controller
     public function Input(Request $user){
         $opsi = Opsi::all();
 
+        $role = $user->session()->get('role');
+
         if(!$user->session()->get('username')){
             return back();
         }else{
-            return view('Input', ['opsi' => $opsi]);
+            return view('Input', ['opsi' => $opsi, 'role' => $role]);
         }
     }
 }

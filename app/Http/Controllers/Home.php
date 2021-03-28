@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\Inventory;
 use App\Models\Users;
 use App\Models\Opsi;
+
+use App\Exports\InventoryExcel;
+use App\Imports\InventoryImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class Home extends Controllers{
 
@@ -19,6 +26,20 @@ class Home extends Controllers{
         foreach($db as $x){
             array_push($this->allData, $x);
         }
+    }
+
+    public function DownloadExcel(Request $user){
+        if(!$user->session()->get('username')){
+            return back();
+        }else{
+            return Excel::download(new InventoryExcel, 'semuabarang.xlsx');
+        }
+    }
+
+    public function AmbilFile(Request $user){
+        $user->file->move(public_path('/'), $user->file->storeAs('xlsx', 'file.xlsx'));
+        Excel::import(new InventoryImport, 'file.xlsx');
+        return back();
     }
 
     public function SemuaBarang(Request $data){
