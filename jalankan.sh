@@ -12,8 +12,8 @@ echo -e $white' \_^_/\n'
 echo -e $green"{ Coder: 'Fajar Firdaus' }\n"
 
 echo -e $yellow'[/] Tunggu sebentar..';
-#composer install
-#echo -e $green'[/] Menginstall package selesai'
+composer install
+echo -e $green'[/] Menginstall package selesai'
 ./artisan db:create inventory
 echo -e $green '[+] Membuat Database Selesai..'
 ./artisan migrate 
