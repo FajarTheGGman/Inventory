@@ -19,21 +19,24 @@
                 <h1 class='text-center mt-5 mb-5 text-xl'>Silahkan Registrasi</h1>
             </div>
             <input type='text' name='username' placeholder='Masukkan Username' class='border-b-2 border-black'/>
+            <input type='email' name='email' placeholder='Masukkan Email' class='border-b-2 border-black mt-5'/>
             <input type='password' name='password' placeholder='Masukkan Password' class='border-b-2 border-black mt-5'/>
 
             <div class='flex flex-row mt-4'>
                 <label for='role'>Role : </label>
                 <select id='role' name='role' class='bg-black text-white rounded-xl text-center place-self-start pl-2 pr-2 ml-2'>
                     <option value='admin'>Admin</option>
-                    <option value='smp'>Smp</option>
-                    <option value='sma'>Sma</option>
-                    <option value='smk'>Smk</option>
+                    @foreach( $data as $x )
+                        <option value={{ $x->pengelola }}>{{ $x->pengelola }}</option>
+                    @endforeach
                 <select>
             </div>
 
             <button type='submit' class='mt-5 bg-black text-white rounded-xl'>Buat</button>
             @if(session('berhasil'))
                 <p class='mt-3 text-center text-green-800'>{{ session('berhasil') }}</p>
+            @elseif( session('gagal') )
+                <p class='mt-3 text-center text-red-700'>{{ session('gagal') }}</p>
             @endif
             <p class='mt-5'>Sudah punya akun ? login di <a href='/' class='text-blue-800'>sini</a></p>
 

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Inventory;
 use App\Models\Users;
 use App\Models\Opsi;
+use App\Models\Pengelola;
+use App\Models\KelompokAset;
+use App\Models\Ruangan;
+use App\Models\SumberDana;
 
 use App\Exports\InventoryExcel;
 use App\Imports\InventoryImport;
@@ -44,17 +48,24 @@ class Home extends Controllers{
 
     public function SemuaBarang(Request $data){
         if($data->cari){
-            $db = Inventory::where('barang', 'like', '%'.$data->barang.'%')->where('kategori', $data->kategori)->where('tempat', $data->tempat)->where('pengelola', $data->pengelola)->paginate(10);
+            $db = Inventory::where('nama', 'like', '%'.$data->nama.'%')->where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->paginate(10);
         }else{
-            $db = Inventory::where('barang', 'like', '%'.$data->barang.'%')->paginate(10);
+            if($data->session()->get('role') !== 'admin'){
+                $db = Inventory::where('pengelola', $data->session()->get('role'))->paginate(10);
+            }else{
+                $db = Inventory::paginate(10);
+            }
         }
 
-        $opsi = Opsi::all();
+        $aset = KelompokAset::all();
+        $tempat = Ruangan::all();
+        $pengelola = Pengelola::all();
+        $sumberdana = SumberDana::all();
 
         if(!$data->session()->get('username')){
             return back();
         }else{
-            return view('SemuaBarang', compact('db'), ['total_data' => $db->count(), 'opsi' => $opsi]);
+            return view('SemuaBarang', compact('db'), ['total_data' => $db->count(), 'aset' => $aset, 'ruangan' => $tempat, 'pengelola' => $pengelola, 'sumberdana' => $sumberdana, 'role' => $data->session()->get('role')]);
         }
     }
 
@@ -80,6 +91,35 @@ class Home extends Controllers{
     }
 
     public function Login(Request $user){
+        $db = Pengelola::all()->count();
+
+        if($db == 0){
+            Pengelola::insert([
+                'pengelola' => 'pustekom',
+                'keterangan' => 'Pustekom Kosgoro'
+            ]);
+
+            Pengelola::insert([
+                'pengelola' => 'ydsk',
+                'keterangan' => 'Yayasan Kosgoro'
+            ]);
+
+            Pengelola::insert([
+                'pengelola' => 'sma',
+                'keterangan' => 'Sma Kosgoro'
+            ]);
+
+            Pengelola::insert([
+                'pengelola' => 'smp',
+                'keterangan' => 'Smp Kosgoro'
+            ]);
+
+            Pengelola::insert([
+                'pengelola' => 'smk',
+                'keterangan' => 'Smk Kosgoro'
+            ]);
+        }
+
         $sesi = $user->session()->get('role');
         
         if($sesi){
@@ -91,7 +131,6 @@ class Home extends Controllers{
 
     public function AllData(Request $user){
 
-        //        $db = Inventory::all();
         $opsi = Opsi::all();
 
         if($user->tempat){
@@ -124,30 +163,66 @@ class Home extends Controllers{
     }
 
     public function RegisterData(Request $input){
-        $db = new Users;
-        $hash = Hash::make($input->password);
-        $db->username = $input->username;
-        $db->password = $hash;
-        $db->role = $input->role;
-        $db->save();
-        return back()->with('berhasil', 'Akun Berhasil Dibuat Silahkan Login');
+        $data = Users::where('username', $input->username)->first();
+
+        if($data){
+            return back()->with('gagal', 'Username atau password sudah terdaftar');
+        }else{
+            echo $data;
+            $db = new Users;
+            $hash = Hash::make($input->password);
+            $db->username = $input->username;
+            $db->password = $hash;
+            $db->email = $input->email;
+            $db->role = $input->role;
+            $db->save();
+            return back()->with('berhasil', 'Akun Berhasil Dibuat Silahkan Login');
+        }
     }
 
     public function Register(){
-        return view('Register');
+        $data = Pengelola::all();
+        return view('Register', ['data' => $data]);
     }
 
     public function Home(Request $user){
         $sesi = $user->session()->get('role');
         $barang = Inventory::all()->count();
         $pengelola = Users::all()->count();
-        $tempat = Opsi::all('tempat')->count();
-        $kategori = Opsi::all('kategori')->count();
+        $tempat = Ruangan::all()->count();
+        $kategori = KelompokAset::all()->count();
+
+        $total_dana_ydsk = Inventory::where('pengelola', 'ydsk')->sum('harga');
+        $total_dana_sma = Inventory::where('pengelola', 'sma')->sum('harga');
+        $total_dana_smp = Inventory::where('pengelola', 'smp')->sum('harga');
+        $total_dana_smk = Inventory::where('pengelola', 'smk')->sum('harga');
+        $total_dana_pustekom = Inventory::where('pengelola', 'pustekom')->sum('harga');
+
+        $role_ydsk = Users::where('role', 'ydsk')->count();
+        $role_pustekom = Users::where('role', 'pustekom')->count();
+        $role_sma = Users::where('role', 'sma')->count();
+        $role_smp = Users::where('role', 'smp')->count();
+        $role_smk = Users::where('role', 'smk')->count();
 
         if(!$sesi){
             return back();
         }else{
-            return view('Dashboard', [ 'total_barang' => $barang, 'pengelola' => $pengelola, 'tempat' => $tempat, 'kategori' => $kategori ]);
+            return view('Dashboard', [ 
+                'total_barang' => $barang, 
+                'pengelola' => $pengelola, 
+                'tempat' => $tempat, 
+                'kategori' => $kategori,
+                'ydsk' => $total_dana_ydsk,
+                'sma' => $total_dana_sma,
+                'smp' => $total_dana_smp,
+                'smk' => $total_dana_smk,
+                'pustekom' => $total_dana_pustekom,
+                'role_ydsk' => $role_ydsk,
+                'role_pustekom' => $role_pustekom,
+                'role_sma' => $role_sma,
+                'role_smp' => $role_smp,
+                'role_smk' => $role_smk
+            ]);
         }
     }
 }

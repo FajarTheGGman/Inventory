@@ -4,9 +4,9 @@
         <link href={{ asset('css/app.css') }} rel="stylesheet" />
     </head>
 
-    <body class="flex flex-col bg-gray-300 justify-between">
+    <body class="flex flex-col bg-gray-300 justify-between pb-10">
         <div class="flex-row bg-white items-center shadow-md duration-700 rounded-xl p-5">
-            <a href="/dashboard" class='ml-5 hover:opacity-60'>Home</a>
+            <a href="/dashboard" class='ml-20 hover:opacity-60'><img src='/icons/box.png' class='w-10 ml-5' /></a>
         </div>
 
         <div class='flex flex-col'>
@@ -41,11 +41,6 @@
                         <img src='/icons/profile/edituser.png' class="w-20 h-20 ml-1"/>
                         <h1 class='mt-5'>Edit User</h1>
                     </a>
-
-                    <a href='/admin/masterdata' class='bg-white shadow-xl p-5 rounded-xl cursor-pointer hover:opacity-60 ml-10 duration-700'>
-                        <img src='/icons/masterdata.png' class="w-20 h-20 ml-1"/>
-                        <h1 class='mt-5'>Master Data</h1>
-                    </a>
                 @else
                     <div></div>
                 @endif
@@ -54,6 +49,34 @@
                     <img src='/icons/profile/changerole.png' class="w-20 h-20 "/>
                     <h1 class='mt-5'>Ganti Role</h1>
                 </a>
+
+            </div>
+
+
+            @if( $role == 'admin' )
+                <div class='flex flex-row place-self-center mt-10 items-center'>
+                    <a href='/admin/sumberdana' class='bg-white shadow-xl p-5 rounded-xl cursor-pointer hover:opacity-60 ml-10 duration-700 flex flex-col items-center'>
+                        <img src='/icons/masterdata/sumberdana.png' class="w-20 h-20 ml-1"/>
+                        <h1 class='mt-2'>Sumber Dana</h1>
+                    </a>
+                
+                    <a href='/admin/ruangan' class='bg-white shadow-xl p-5 rounded-xl cursor-pointer hover:opacity-60 ml-10 duration-700 flex flex-col items-center'>
+                        <img src='/icons/masterdata/ruangan.png' class="w-20 h-20 ml-1"/>
+                        <h1 class='mt-2'>Ruangan</h1>
+                    </a>
+
+                    <a href='/admin/pengelola' class='bg-white shadow-xl p-5 rounded-xl cursor-pointer hover:opacity-60 ml-10 duration-700 flex flex-col items-center'>
+                        <img src='/icons/pengelola.png' class="w-20 h-20 ml-1"/>
+                        <h1 class='mt-2'>Pengelola</h1>
+                    </a>
+
+                   <a href='/admin/kelompokaset' class='bg-white shadow-xl p-5 rounded-xl cursor-pointer hover:opacity-60 ml-10 duration-700 flex flex-col items-center'>
+                        <img src='/icons/masterdata/kelompokaset.png' class="w-20 h-20 ml-1"/>
+                        <h1 class='mt-2'>Kelompok Aset</h1>
+                    </a>
+                </div>
+            @endif
+
 
             </div>
 

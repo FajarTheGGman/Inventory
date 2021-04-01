@@ -11,6 +11,13 @@ use App\Http\Controllers\EditController;
 
 // Admin
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SumberAset;
+use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\PengelolaController;
+use App\Http\Controllers\KelompokAsetController;
+
+// Api
+use App\Http\Controllers\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,15 +33,17 @@ use App\Http\Controllers\AdminController;
 // Route untuk crud data
 Route::post('/input/data', [InputController::class, 'Send']);
 Route::post('/delete/data', [DeleteController::class, 'send']);
-Route::post('/edit/data', [EditController::class, 'send']);
+Route::post('/edit/data/{id}', [EditController::class, 'send']);
 Route::post('/register/data', [Home::class, 'RegisterData']);
 Route::post('/', [Home::class, 'validasi']);
 
 // Route untuk fitur admin
 Route::post('/admin/delete/data', [AdminController::class, 'Delete']);
 Route::post('/admin/edit/data', [AdminController::class, 'Edit']);
-Route::post('/admin/masterdata/delete/{id}', [AdminController::class, 'MasterDataDelete']);
-Route::post('/admin/masterdata/input/data', [AdminController::class, 'MasterDataInputData']);
+
+
+//Route::post('/admin/masterdata/delete/{id}', [AdminController::class, 'MasterDataDelete']);
+//Route::post('/admin/masterdata/input/data', [AdminController::class, 'MasterDataInputData']);
 
 // Route crud profile
 Route::post('/profile/newusername', [Profile::class, 'UsernameData']);
@@ -46,6 +55,30 @@ Route::get('/profile/gantiusername', [Profile::class, 'Username']);
 Route::get('/profile/gantipassword', [Profile::class, 'Password']);
 Route::get('/profile/gantirole', [Profile::class, 'Role']);
 
+// Master Data ( Sumber Dana )
+Route::get('/admin/sumberdana', [SumberAset::class, 'Index']);
+Route::get('/admin/sumberdana/input',[SumberAset::class, 'SumberDanaInput']);
+Route::post('/admin/sumberdana/delete/{id}', [SumberAset::class, 'SumberDanaDelete']);
+Route::post('/admin/sumberdana/input/data', [SumberAset::class, 'SumberDanaInputData']);
+
+// Master Data ( Ruangan )
+Route::get('/admin/ruangan', [RuanganController::class, 'Index']);
+Route::get('/admin/ruangan/input', [RuanganController::class, 'Input']);
+Route::post('/admin/ruangan/input/data', [RuanganController::class, 'Kirim']);
+Route::post('/admin/ruangan/delete/{id}', [RuanganController::class, 'Delete']);
+
+// Master Data ( Pengelola Aset )
+Route::get('/admin/pengelola', [PengelolaController::class, 'Index']);
+Route::get('/admin/pengelola/input', [PengelolaController::class, 'Input']);
+Route::post('/admin/pengelola/input/data', [PengelolaController::class, 'Kirim']);
+Route::post('/admin/pengelola/delete/{id}', [PengelolaController::class, 'Delete']);
+
+// Master Data ( Kelompok Aset )
+Route::get('/admin/kelompokaset', [KelompokAsetController::class, 'Index']);
+Route::get('/admin/kelompokaset/input', [KelompokAsetController::class, 'Input']);
+Route::post('/admin/kelompokaset/input/data', [KelompokAsetController::class, 'Kirim']);
+Route::post('/admin/kelompokaset/delete/{id}', [KelompokAsetController::class, 'Delete']);
+
 // Route action crud
 Route::post('/delete/{id}', [DeleteController::class, 'DeleteId']);
 
@@ -53,7 +86,7 @@ Route::post('/delete/{id}', [DeleteController::class, 'DeleteId']);
 Route::get('/search', [Home::class, 'Search']);
 Route::get('/delete/', [DeleteController::class, 'Delete']);
 Route::get('/input', [InputController::class, 'Input']);
-Route::get('/edit', [EditController::class, 'Edit']);
+Route::get('/edit/{id}', [EditController::class, 'Edit']);
 Route::get('/profile', [Profile::class, 'Profile']);
 Route::get('/dashboard', [Home::class, 'Home']);
 Route::get('/semuabarang', [Home::class, 'SemuaBarang']);
@@ -65,8 +98,12 @@ Route::post('/semuabarang/import', [Home::class, 'AmbilFile']);
 // Route untuk views admin
 Route::get('/admin/edit', [AdminController::class, 'EditUser']);
 Route::get('/admin/delete', [AdminController::class, 'DeleteUser']);
-Route::get('/admin/masterdata', [AdminController::class, 'MasterData']);
-Route::get('/admin/masterdata/input', [AdminController::class, 'MasterDataInput']);
+Route::get('/admin/user', [AdminController::class, 'User']);
+
+// Api
+Route::get('/api/totaldana/{id}', [Api::class, 'Total_Dana']);
+Route::get('/api/datapengelola', [Api::class, 'Data_Pengelola']);
+Route::get('/api/datapengelola/total', [Api::class, 'Total_Pengelola']);
 
 // Route untuk autentikasi
 Route::get('/', [Home::class, 'Login']);

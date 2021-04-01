@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+// Models
 use App\Models\Users;
 use App\Models\Opsi;
+use App\Models\SumberDana;
+use App\Models\Ruangan;
 
 class AdminController extends Controller
 {
@@ -35,6 +39,15 @@ class AdminController extends Controller
         return back();
     }
 
+    public function User(Request $user){
+        if($user->session()->get('role') !== 'admin'){
+            return back();
+        }else{
+            $data = Users::paginate(10);
+            return view('admin/DaftarUser', ['data' => $data]);
+        }
+    }
+
     public function DeleteUser(Request $user){
         if($user->session()->get('role') == 'admin'){
             return view('admin/DeleteUser');
@@ -43,41 +56,7 @@ class AdminController extends Controller
         }
     }
 
-    public function MasterDataDelete($id){
-        $db = Opsi::where('id', $id)->delete();
-        return back();
-    }
-
-    public function MasterDataInput(Request $user){
-        if($user->session()->get('role') !== 'admin'){
-            return back();
-        }else{
-            return view('admin/MasterDataInput');
-        }
-    }
-
-    public function MasterDataInputData(Request $user){
-        if($user->session()->get('role') !== 'admin'){
-            return back();
-        }else{
-            Opsi::insert([
-                'tempat' => $user->tempat,
-                'kategori' => $user->kategori
-            ]);
-
-            return back()->with('berhasil', 'Berhasil Memasukkan Data');
-        }
-    }
-
-    public function MasterData(Request $user){
-        $data = Opsi::paginate(10);
-        if($user->session()->get('role') !== 'admin'){
-            return back();
-        }else{
-            return view('admin/MasterData', compact('data'));
-        }
-
-    }
+    
 
     public function EditUser(Request $user){
         if($user->session()->get('role') == 'admin'){
