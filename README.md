@@ -8,7 +8,7 @@
 ![](https://img.shields.io/badge/Language-PHP-blue?style=for-the-badge) ![](https://img.shields.io/badge/Style-Tailwindcss-lime?style=for-the-badge)
 
 
- # Dashboard
+ # Dashboard <img src="https://www.flaticon.com/svg/vstatic/svg/921/921591.svg?token=exp=1617326095~hmac=be2ef0d43284680c6acdb17b4a34c841" width="50" height="50"/>
 <img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/home' />
 
  # Statistik
