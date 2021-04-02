@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventory;
-use App\Models\Opsi;
 
 class DeleteController extends Controller
 {
@@ -18,13 +17,4 @@ class DeleteController extends Controller
       return back();
     }
 
-    public function Delete(Request $user){
-        $opsi = Opsi::all();
-
-        if(!$user->session()->get('username')){
-            return back();
-        }else{
-            return view('Delete', ['opsi' => $opsi]);
-        }
-    }
 }

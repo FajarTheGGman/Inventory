@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Hash;
 
 // Models
 use App\Models\Users;
-use App\Models\Opsi;
 use App\Models\SumberDana;
 use App\Models\Ruangan;
 

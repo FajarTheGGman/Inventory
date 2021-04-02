@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Inventory;
 use App\Models\Users;
-use App\Models\Opsi;
 use App\Models\Pengelola;
 use App\Models\KelompokAset;
 use App\Models\Ruangan;
@@ -48,7 +47,11 @@ class Home extends Controllers{
 
     public function SemuaBarang(Request $data){
         if($data->cari){
-            $db = Inventory::where('nama', 'like', '%'.$data->nama.'%')->where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->paginate(10);
+            if($data->nama == null){
+                $db = Inventory::where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->paginate(10);
+            }else{
+                $db = Inventory::where('nama', 'like', '%'.$data->nama.'%')->where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->paginate(10);
+            }
         }else{
             if($data->session()->get('role') !== 'admin'){
                 $db = Inventory::where('pengelola', $data->session()->get('role'))->paginate(10);
@@ -127,34 +130,6 @@ class Home extends Controllers{
         }else{
             return view('Login');
         }
-    }
-
-    public function AllData(Request $user){
-
-        $opsi = Opsi::all();
-
-        if($user->tempat){
-            if(!$user->pengelola){
-                $pengelola = $user->session()->get('role');
-            }else{
-                $pengelola = $user->pengelola;
-            }
-
-            $db = Inventory::where('tempat', $user->tempat)->where('kategori', $user->kategori)->where('pengelola', $pengelola)->get();
-        }else{
-            if($user->session()->get('role') == 'admin'){
-                $db = Inventory::all();
-            }else{
-                $db = Inventory::where('pengelola', $user->session()->get('role'))->get();
-            }
-        }
-
-        if(!$user->session()->get('username')){
-            return back();
-        }else{
-            return view('AllData', ['data' => $db, 'opsi' => $opsi, 'role' => $user->session()->get('role')]);
-        }
-
     }
 
     public function Logout(Request $user){

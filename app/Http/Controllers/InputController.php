@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventory;
-use App\Models\Opsi;
 use App\Models\Ruangan;
 use App\Models\KelompokAset;
 use App\Models\SumberDana;
@@ -13,17 +12,6 @@ class InputController extends Controller
 {
     
     public function Send(Request $input){
-/*        $x = new Inventory;
-        $x->pengelola = $input->session()->get('role');
-        $x->tempat = $input->tempat;
-        $x->kategori = $input->kategori;
-        $x->barang = $input->nama;
-        $x->jumlah = $input->jumlah;
-        $x->baik = $input->baik;
-        $x->rusak = $input->rusak;
-        $x->waktu_di_tambahkan = Date('d').'-'.Date('m').'-'.Date('y');
-        $x->save();*/
-
         $kode = $input->session()->get('role').'-'.$input->tempat.'/'.$input->sumberdana.'/'.$input->tahunbeli;
 
         echo $input->kelompokaset;
