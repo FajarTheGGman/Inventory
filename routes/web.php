@@ -84,7 +84,6 @@ Route::post('/delete/{id}', [DeleteController::class, 'DeleteId']);
 
 // Route untuk views
 Route::get('/search', [Home::class, 'Search']);
-Route::get('/delete/', [DeleteController::class, 'Delete']);
 Route::get('/input', [InputController::class, 'Input']);
 Route::get('/edit/{id}', [EditController::class, 'Edit']);
 Route::get('/profile', [Profile::class, 'Profile']);

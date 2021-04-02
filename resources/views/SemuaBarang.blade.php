@@ -41,7 +41,7 @@
                     <label for='tempat' class='ml-5'>Tempat : </label>
                     <select name='tempat' id='tempat' class='bg-black text-white rounded-xl ml-2 pl-2'>
                         @foreach( $ruangan as $tempat )
-                            <option value={{ $tempat->kode }}>{{ $tempat->nama }}</option>
+                            <option value={{ $tempat->nama }}>{{ $tempat->nama }}</option>
                         @endforeach
                     </select>
 
