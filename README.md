@@ -18,7 +18,7 @@
 
 - Linux
 <pre>
-$ sh install.sh
+$ sh jalankan.sh
 </pre>
 
 - Windows
