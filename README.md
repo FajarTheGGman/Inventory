@@ -7,7 +7,7 @@
 
 ![](https://img.shields.io/badge/Language-PHP-blue?style=for-the-badge) ![](https://img.shields.io/badge/Style-Tailwindcss-lime?style=for-the-badge)
 
-<a href="https://github.com/FajarTheGGman/Inventory/archive/refs/heads/main.zip"><img src="https://www.flaticon.com/svg/vstatic/svg/4420/4420152.svg?token=exp=1617359129~hmac=b0cfa16aa362796e69c6e70f8bbfec90" width="20" height="20"/>Download This Project</a>
+<a href="https://github.com/FajarTheGGman/Inventory/archive/refs/heads/main.zip"><img src="https://www.flaticon.com/svg/vstatic/svg/4420/4420152.svg?token=exp=1617359129~hmac=b0cfa16aa362796e69c6e70f8bbfec90" width="20" style="margin-top: 10px" height="20"/>Download This Project</a>
 
  # <img src="https://www.flaticon.com/svg/vstatic/svg/2782/2782066.svg?token=exp=1617326284~hmac=783d921c851df88c272443f14fc498ec" width="30" height="30"/> Dashboard 
 <img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/home' />
