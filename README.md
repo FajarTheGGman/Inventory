@@ -33,7 +33,7 @@
 
 - <img src="https://www.flaticon.com/svg/vstatic/svg/226/226772.svg?token=exp=1617326654~hmac=58c163553afbb94825d461da4b597634" width="20" height="20" /> Linux
 <pre>
-$ sh jalankan.sh
+$ bash jalankan.sh
 </pre>
 
 - <img src="https://www.flaticon.com/svg/vstatic/svg/888/888882.svg?token=exp=1617326699~hmac=7b514b1480b44ec1df4e276c87872a1c" width="20" height="20" /> Windows
