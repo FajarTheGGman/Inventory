@@ -7,15 +7,15 @@
 
 <body class='flex flex-col bg-gray-300 justify-between'>
     <div class='flex flex-col place-self-center justify-center bg-white p-5 mt-5 rounded-xl shadow-xl'>
-        <img src='/icons/box.png' class='flex flex-center items-center w-12'/>
+        <img src='{{ url('/icons/box.png') }}' class='flex flex-center items-center w-12'/>
     </div>
     <h1 class='text-center mt-5 text-xl'>Aplikasi Sistem Inventory</h1>
 
     <div class='flex place-self-center justify-center items-center'>
-        <form action='/register/data' method='post' class='flex flex-col place-self-center bg-white p-5 mt-5 shadow-xl rounded-xl'>
+        <form action='{{ url('/register/data') }}' method='post' class='flex flex-col place-self-center bg-white p-5 mt-5 shadow-xl rounded-xl'>
             @csrf
             <div class='flex flex-col items-center'>
-                <img src='/icons/box.png' class='w-14'/>
+                <img src='{{ url('/icons/box.png') }}' class='w-14'/>
                 <h1 class='text-center mt-5 mb-5 text-xl'>Silahkan Registrasi</h1>
             </div>
             <input type='text' name='username' placeholder='Masukkan Username' class='border-b-2 border-black'/>
@@ -38,7 +38,7 @@
             @elseif( session('gagal') )
                 <p class='mt-3 text-center text-red-700'>{{ session('gagal') }}</p>
             @endif
-            <p class='mt-5'>Sudah punya akun ? login di <a href='/' class='text-blue-800'>sini</a></p>
+            <p class='mt-5'>Sudah punya akun ? login di <a href='{{ url('/') }}' class='text-blue-800'>sini</a></p>
 
         </form>
     </div>

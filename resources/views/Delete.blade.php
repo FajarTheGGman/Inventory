@@ -4,11 +4,11 @@
 
     <div class='flex flex-col place-self-center mt-10 bg-white shadow-xl rounded-xl p-10 duration-700'>
         <div class='flex flex-col items-center'>
-            <img src='/icons/crud/delete.png' class='w-14' />
+            <img src='{{ url('/icons/crud/delete.png') }}' class='w-14' />
             <h1 class='mt-5 text-xl'>Hapus Barang</h1>
         </div>
 
-        <form action='/delete/data' method='post' class='flex items-start flex-col mt-10'>
+        <form action='{{ url('/delete/data') }} ' method='post' class='flex items-start flex-col mt-10'>
             @csrf
             <input type='text' name='tempat' placeholder='Nama Barang' class='border-b-2 border-black placeholder-grey-900' />
 

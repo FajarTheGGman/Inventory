@@ -5,18 +5,18 @@
             @if( $tempat->count() == 0 || $aset->count() == 0 || $dana->count() == 0 )
                 @if( $role == 'admin' )
                     <strong class='text-center mt-2 text-red-800'>Isi form master data terlebih dahulu !</strong>
-                    <a href='/profile' class='flex bg-green-700 rounded-xl place-self-center mt-2 text-white p-2'>Master Data</a>
+                    <a href='{{ url('/profile') }} ' class='flex bg-green-700 rounded-xl place-self-center mt-2 text-white p-2'>Master Data</a>
                 @else
                     <strong class='text-center mt-2 text-red-800'>Master Data Kosong!, silahkan login sebagai admin dan isi master data</strong>
                 @endif
             @else
             <div class='p-10'>
                 <div class='flex flex-col justify-center items-center'>
-                    <img src='/icons/crud/input.png' class='w-14'/>
+                    <img src='{{ url('/icons/crud/input.png') }} ' class='w-14'/>
                     <h1 class='text-center text-xl mt-5'>Form isi inventory</h1>
                 </div>
 
-                <form class='mt-8' method='post' action='/input/data'>
+                <form class='mt-8' method='post' action='{{ url('/input/data') }} '>
                     @csrf
                     <div class='flex flex-col'>
                         <input type='text' name='nama' class='border-b-2 border-black hover:border-green-800 duration-700' placeholder='Nama Barang'/>
@@ -32,7 +32,7 @@
 
                     <select id='tempat' name='tempat' class='mt-10 bg-black text-white rounded-xl pl-2 pr-2'>
                         @foreach( $tempat as $ruangan )
-                            <option value={{ $ruangan->nama }}>{{ $ruangan->nama }}</option>
+                            <option value={{ $ruangan->kode }}>{{ $ruangan->nama }}</option>
                         @endforeach
                     </select>
 

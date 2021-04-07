@@ -3,11 +3,11 @@
 @section('body')
     <div class='flex flex-col place-self-center bg-white p-5 rounded-xl shadow-xl mt-20'>
         <div class='flex flex-col items-center'>
-            <img src='/icons/masterdata/sumberdana.png' class='w-20' />
+            <img src='{{ url('/icons/masterdata/sumberdana.png') }}' class='w-20' />
             <h1 class='text-center bg-black p-2 text-white mt-3 rounded-xl'>Sumber Dana Input</h1>
         </div>
 
-        <form action='/admin/sumberdana/input/data' method='post' class='mt-5 flex flex-col'>
+        <form action='{{ url('/admin/sumberdana/input/data') }} ' method='post' class='mt-5 flex flex-col'>
             @csrf
             <div class='flex flex-col'>
                 <input name='nama' type='text' placeholder='Masukkan Nama' class='border-4 border-black rounded-xl p-2' />
@@ -19,5 +19,5 @@
             @endif
         </form>
     </div>
-    <a href='/admin/sumberdana' class='flex place-self-center mt-2 bg-yellow-600 p-2 rounded-xl'>Kembali</a>
+    <a href='{{ url('/admin/sumberdana') }} ' class='flex place-self-center mt-2 bg-yellow-600 p-2 rounded-xl'>Kembali</a>
 @endsection

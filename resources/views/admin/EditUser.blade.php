@@ -4,12 +4,12 @@
 
     <div class='flex flex-col place-self-center bg-white mt-20 p-5 rounded-xl shadow-xl'>
         <div class='flex flex-col items-center'>
-            <img src='/icons/profile/edituser.png' class='w-14' />
+            <img src='{{ url('/icons/profile/edituser.png') }} ' class='w-14' />
             <h1 class='mt-5 text-xl'>Edit User</h1>
         </div>
 
         <div class='flex flex-col mt-5'>
-            <form class='flex flex-row' action='/admin/edit/data' method='post' >
+            <form class='flex flex-row' action='{{ url('/admin/edit/data') }} ' method='post' >
                 @csrf
                 <input type='text' name='username' placeholder='Masukkan Username' class='border-b-2 border-black w-40' />
                 <input type='text' name='newusername' placeholder='Ganti Username' class='border-b-2 border-black ml-5 w-40' />
