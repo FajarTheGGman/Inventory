@@ -23,7 +23,6 @@
 <img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/pengelola.jpeg' />
 <img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/ruangan.jpeg' />
 <img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/kelompokaset.jpeg'/>
-<img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/sumberdana.jpeg' />
 
 # <img src="https://www.flaticon.com/svg/vstatic/svg/4420/4420227.svg?token=exp=1617326441~hmac=65af2ac7fc5f372063a134232a829bbb" width="30" height="30" /> Form Input Data 
 <img src='https://raw.githubusercontent.com/FajarTheGGman/Inventory/master/.img/input.jpeg' />
