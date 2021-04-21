@@ -108,3 +108,18 @@ Route::get('/api/datapengelola/total', [Api::class, 'Total_Pengelola']);
 Route::get('/', [Home::class, 'Login']);
 Route::get('/register', [Home::class, 'Register']);
 Route::get('/logout', [Home::class, 'Logout']);
+
+Route::get('/config-clear', function() {
+    $status = Artisan::call('config:clear');
+    return '<h1>Configurations cleared</h1>';
+});
+
+Route::get('/cache-clear', function() {
+    $status = Artisan::call('cache:clear');
+    return '<h1>Cache cleared</h1>';
+});
+
+Route::get('/config-cache', function() {
+    $status = Artisan::call('config:Cache');
+    return '<h1>Configurations cache cleared</h1>';
+});
