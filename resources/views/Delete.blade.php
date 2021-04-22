@@ -37,6 +37,21 @@
                 <p class='text-center text-red-700 mt-5'>{{ session('berhasil') }}</p>
             @endif
         </form>
+        <script>
+          if("{{ session('berhasil') }}"){
+              Swal.fire({
+                  title: "Berhasil",
+                  text: "Berhasil Menghapus user",
+                  icon: "success"
+              })
+          }else if("{{ session('gagal') }}"){
+              Swal.fire({
+                  title: "Gagal",
+                  text: "User tidak ditemukan",
+                  icon: "error"
+              })
+          }
+        </script>
     </div>
 
 @endsection

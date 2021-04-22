@@ -4,7 +4,7 @@
 
     <div class='flex flex-col place-self-center bg-white mt-20 p-5 rounded-xl shadow-xl'>
         <div class='flex flex-col items-center'>
-            <img src='{{ url('/icons/profile/edituser.png') }} ' class='w-14' />
+            <img src='{{ env("IMG") }}/icons/profile/edituser.png' class='w-14' />
             <h1 class='mt-5 text-xl'>Edit User</h1>
         </div>
 

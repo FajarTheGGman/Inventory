@@ -22,13 +22,18 @@ class RuanganController extends Controller
         if($data->session()->get('role') !== 'admin'){
             return back();
         }else{
-            Ruangan::insert([
-                'nama' => $data->nama,
-                'kode' => $data->kode,
-                'keterangan' => $data->keterangan
-            ]);
+            $check = Ruangan::where('nama', $data->nama)->where('kode', $data->kode)->count();
 
-            return back()->with('berhasil', 'Data Berhasil Tambahkan');
+            if($check == 1){
+                return back()->with('gagal', 'gagal');
+            }else{
+                Ruangan::insert([
+                    'nama' => $data->nama,
+                    'kode' => $data->kode,
+                    'keterangan' => $data->keterangan
+                ]);
+               return back()->with('berhasil', 'Data Berhasil Tambahkan');
+            }
         }
     }
 

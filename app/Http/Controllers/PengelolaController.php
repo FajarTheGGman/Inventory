@@ -21,12 +21,17 @@ class PengelolaController extends Controller
         if($user->session()->get('role') !== 'admin'){
             return back();
         }else{
-            Pengelola::insert([
-                'pengelola' => $user->nama,
-                'keterangan' => $user->keterangan
-            ]);
+            $check = Pengelola::where('pengelola', $user->nama)->count();
 
-            return back()->with('berhasil', 'Data Berhasil di input');
+            if($check == 1){
+                return back()->with('gagal', 'gagal');
+            }else{
+                Pengelola::insert([
+                    'pengelola' => $user->nama,
+                    'keterangan' => $user->keterangan
+                ]);
+                return back()->with('berhasil', 'Data Berhasil di input');
+            }
         }
     }
 

@@ -20,13 +20,18 @@ class KelompokAsetController extends Controller
         if($user->session()->get('role') !== 'admin'){
             return back();
         }else{
-            KelompokAset::insert([
-                'nama' => $user->nama,
-                'umur_ekonomis' => $user->umurekonomis,
-                'keterangan' => $user->keterangan
-            ]);
+            $check = KelompokAset::where('nama', $user->nama)->where('umur_ekonomis', $user->nama)->where('keterangan', $user->keterangan)->count();
 
-            return back()->with('berhasil', 'Data Berhasil Di Input');
+            if($check == 1){
+                return back()->with('gagal', 'gagal');
+            }else{
+                KelompokAset::insert([
+                    'nama' => $user->nama,
+                    'umur_ekonomis' => $user->umurekonomis,
+                    'keterangan' => $user->keterangan
+                ]);
+                return back()->with('berhasil', 'Data Berhasil Di Input');
+            }
         }
     }
 

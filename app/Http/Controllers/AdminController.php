@@ -33,9 +33,14 @@ class AdminController extends Controller
     }
 
     public function Delete(Request $user){
-        Users::where('username', $user->username)->delete();
+        $check = Users::where('username', $user->username)->count();
 
-        return back();
+        if($check == 1){
+            Users::where('username', $user->username)->delete();
+            return back()->with('berhasil', 'berhasil');
+        }else{
+            return back()->with('gagal', 'gagal');
+        }
     }
 
     public function User(Request $user){

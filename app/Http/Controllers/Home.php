@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+use Alert;
+
 use App\Models\Inventory;
 use App\Models\Users;
 use App\Models\Pengelola;
@@ -40,15 +42,14 @@ class Home extends Controllers{
     }
 
     public function AmbilFile(Request $user){
-        $user->file->move(public_path('/'), $user->file->storeAs('xlsx', 'file.xlsx'));
-        Excel::import(new InventoryImport, 'file.xlsx');
-        return back();
+        Excel::import(new InventoryImport, $user->file);
+        return back()->with('berhasil', 'done');
     }
 
     public function SemuaBarang(Request $data){
         if($data->cari){
             if($data->nama == null){
-                $db = Inventory::where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->paginate(10);
+                $db = Inventory::where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->where('pengelola', $data->pengelola)->where('kelompok_aset', $data->kelompokaset)->paginate(10);
             }else{
                 $db = Inventory::where('nama', 'like', '%'.$data->nama.'%')->where('tempat', $data->tempat)->where('sumber_dana', $data->sumberaset)->paginate(10);
             }
@@ -126,7 +127,7 @@ class Home extends Controllers{
         $sesi = $user->session()->get('role');
         
         if($sesi){
-            return back();
+            return redirect('/dashboard');
         }else{
             return view('Login');
         }
@@ -141,7 +142,7 @@ class Home extends Controllers{
         $data = Users::where('username', $input->username)->first();
 
         if($data){
-            return back()->with('gagal', 'Username atau password sudah terdaftar');
+            return back()->with('gagal', 'gagal');
         }else{
             echo $data;
             $db = new Users;
@@ -155,9 +156,13 @@ class Home extends Controllers{
         }
     }
 
-    public function Register(){
-        $data = Pengelola::all();
-        return view('Register', ['data' => $data]);
+    public function Register(Request $user){
+        if($user->session()->get('role') !== 'admin'){
+            return back();
+        }else{
+            $data = Pengelola::all();
+            return view('Register', ['data' => $data]);
+        }
     }
 
     public function Home(Request $user){
@@ -196,7 +201,8 @@ class Home extends Controllers{
                 'role_pustekom' => $role_pustekom,
                 'role_sma' => $role_sma,
                 'role_smp' => $role_smp,
-                'role_smk' => $role_smk
+                'role_smk' => $role_smk,
+                'role' => $user->session()->get('role')
             ]);
         }
     }

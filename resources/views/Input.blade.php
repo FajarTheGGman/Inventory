@@ -12,7 +12,7 @@
             @else
             <div class='p-10'>
                 <div class='flex flex-col justify-center items-center'>
-                    <img src='{{ url('/icons/crud/input.png') }} ' class='w-14'/>
+                    <img src='{{ env("IMG") }}/icons/crud/input.png' class='w-14'/>
                     <h1 class='text-center text-xl mt-5'>Form isi inventory</h1>
                 </div>
 
@@ -21,8 +21,14 @@
                     <div class='flex flex-col'>
                         <input type='text' name='nama' class='border-b-2 border-black hover:border-green-800 duration-700' placeholder='Nama Barang'/>
                         <input type='number' name='tahunbeli' class='border-b-2 border-black mt-5' placeholder='Tahun Pembelian' />
-                        <input type='text' name='jenis' class='border-b-2 border-black mt-5' placeholder='Jenis' />
-                        <input type='text' name='merk' class='border-b-2 border-black mt-5' placeholder='Merk Spek' />
+                        <div class="flex flex-row mt-3">
+                            <label for='j'>Jenis : </label>
+                            <select id="j" name="jenis" class="bg-black text-white rounded-xl pl-2 ml-2">
+                                <option cl>Furniture</option>
+                                <option>Elektronik</option>
+                            </select>
+                        </div>
+                        <input type='text' name='merk' class='border-b-2 border-black mt-2' placeholder='Merk Spek' />
                         <input type='number' name='jumlah' class='border-b-2 border-black mt-5' placeholder='Jumlah' />
                         <input type='number' name='harga' class='border-b-2 border-black mt-5' placeholder='Harga Beli' />
                         <input type='text' name='keterangan' class='border-b-2 border-black mt-5' placeholder='Keterangan'/>
@@ -64,12 +70,20 @@
                     </div>
 
                     <button class='mt-5 bg-green-800 p-2 rounded-xl shadow-xl' type='submit'>Kirim</button>
-                    @if( session('berhasil') )
-                        <p class='text-center text-md text-green-800'>{{ session('berhasil') }}</p>
-                    @endif
+
+                    <script>
+                        if("{{ session('berhasil') }}"){
+                            Swal.fire({
+                                title: 'Berhasil',
+                                text: 'Data Berhasil Di Tambahkan',
+                                icon: 'success'
+                            })
+                        }
+                    </script>
 
                 </form>
             </div>
         @endif
         </div>
+        <a href={{ url('/semuabarang') }} class='flex place-self-center bg-yellow-600 rounded-xl p-3 text-xl mb-10'>Kembali</a>
 @endsection

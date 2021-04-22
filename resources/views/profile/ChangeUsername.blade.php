@@ -4,7 +4,7 @@
 
     <div class='flex flex-col place-self-center bg-white p-5 mt-16 shadow-xl rounded-xl'>
         <div class='flex flex-col items-center'>
-            <img src='/icons/profile/changeusername.png' class='w-16'/>
+            <img src='{{ env("IMG") }}/icons/profile/changeusername.png' class='w-16'/>
             <h1 class='mt-5 text-xl'>Ganti Username</h1>
         </div>
 

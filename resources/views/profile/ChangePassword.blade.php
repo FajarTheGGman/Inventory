@@ -5,7 +5,7 @@
     <form action='/profile/newpassword' method='post' class='flex flex-col place-self-center p-5 bg-white rounded-xl shadow-xl mt-20'>
         @csrf
         <div class='flex flex-col items-center'>
-            <img src='/icons/profile/changepassword.png' class='w-20' />
+            <img src='{{ env("IMG") }}/icons/profile/changepassword.png' class='w-20' />
             <h1 class='mt-5 text-xl'>Ganti Password</h1>
         </div>
         

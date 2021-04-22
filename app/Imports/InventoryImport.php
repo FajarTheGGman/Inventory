@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Inventory;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class InventoryImport implements ToModel
+class InventoryImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,15 +16,21 @@ class InventoryImport implements ToModel
     public function model(array $row)
     {
         return new Inventory([
-            'id' => $row[0],
-            'pengelola' => $row[1],
-            'tempat' => $row[2],
-            'kategori' => $row[3],
-            'barang' => $row[4],
-            'jumlah' => $row[5],
-            'baik' => $row[6],
-            'rusak' => $row[7],
-            'waktu_di_tambahkan' => $row[8]
-        ]);
+            'id' => $row['id'],
+            'pengelola' => $row['pengelola'],
+            'tempat' => $row['tempat'],
+            'kelompok_aset' => $row['kelompok_aset'],
+            'jenis' => $row['jenis'],
+            'nama' => $row['nama'],
+            'jumlah' => $row['jumlah'],
+            'kondisi' => $row['kondisi'],
+            'kode' => $row['kode'],
+            'merk' => $row['merk'],
+            'harga' => $row['harga'],
+            'tahun_pembelian' => $row['tahun_pembelian'],
+            'sumber_dana' => $row['sumber_dana'],
+            'keterangan' => $row['keterangan'],
+            'waktu_di_tambahkan' => $row['waktu_di_tambahkan']
+         ]);
     }
 }

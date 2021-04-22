@@ -3,7 +3,7 @@
 @section('body')
     <div class='flex flex-col place-self-center bg-white p-5 rounded-xl shadow-xl mt-20'>
         <div class='flex flex-col items-center'>
-            <img src='{{ url('/icons/masterdata/kelompokaset.png') }} ' class='w-20' />
+            <img src='{{ env("IMG") }}/icons/masterdata/kelompokaset.png' class='w-20' />
             <h1 class='text-center bg-black p-2 text-white mt-3 rounded-xl'>Kelompok Aset Input</h1>
         </div>
 
@@ -19,6 +19,21 @@
                 <p class='text-center text-green-700 mt-5 text-md '>{{ session('berhasil') }}</p>
             @endif
         </form>
+        <script>
+            if("{{ session('gagal') }}"){
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Data Kelompok Aset Sudah Terdaftar',
+                    icon: 'error'
+                })
+            }else if("{{ session('berhasil') }}"){
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Berhasil Memasukkan Data',
+                    icon: 'success'
+                })
+            }
+        </script>
     </div>
     <a href='{{ url('/admin/kelompokaset') }} ' class='flex place-self-center mt-2 bg-yellow-600 p-2 rounded-xl mb-10'>Kembali</a>
 @endsection

@@ -4,15 +4,19 @@
 
     <div class='flex flex-col place-self-center bg-white shadow-xl rounded-xl p-5 mt-5 mb-10'>
         <div class='flex flex-col items-center'>
-            <img src='{{ url('/icons/box.png') }} ' class='w-20'/>
+            <img src='{{ env("IMG") }}/icons/box.png' class='w-20'/>
             <h1 class='text-center text-xl mt-5 bg-black p-2 rounded-xl text-white shadow-xl'>Semua Data Barang</h1>
         </div>
 
         @if( $total_data == 0 )
-            <h1 class='text-center text-red-700 text-xl mt-10'>Barang Tidak Ditemukan</h1>
-            <div class='flex flex-col items-center mt-5'>
-                <a href='{{ url('/input') }} ' class='bg-green-600 p-2 text-white rounded-xl'>Input Barang</a>
-            </div>
+            @if( $aset->count() == 0 || $tempat->count() == 0 || $pengelola->count() == 0 || $sumberdana->count() == 0 )
+                <h1 class='text-center text-red-700 text-xl mt-10'>Barang Tidak Ditemukan</h1>
+                <div class='flex flex-col items-center mt-5'>
+                    <a href='{{ url('/input') }} ' class='bg-green-600 p-2 text-white rounded-xl'>Input Barang</a>
+                </div>
+                <h1 class='flex place-self-center mt-5'>Atau</h1>
+                <a href={{ url('/semuabarang/import') }} class='flex place-self-center bg-yellow-600 p-2 rounded-md mt-5'>Import Barang</a>
+            @endif
         @else
             <form action='{{ url('/semuabarang') }} ' method='get' class='flex flex-col items-center justify-center'>
                 @csrf
@@ -35,13 +39,15 @@
                             <option value={{ $tempat->kode }}>{{ $tempat->nama }}</option>
                         @endforeach
                     </select>
-
-                    <label for='pengelola' class='ml-5'>Pengelola : </label>
-                    <select name='pengelola' id='pengelola' class='bg-black text-white rounded-xl ml-2 pl-2'>
-                        @foreach( $pengelola as $user )
-                            <option value={{ $user->pengelola }}>{{ $user->pengelola }}</option>
-                        @endforeach
-                    </select>
+                    
+                    @if( $role == 'admin' )
+                        <label for='pengelola' class='ml-5'>Pengelola : </label>
+                        <select name='pengelola' id='pengelola' class='bg-black text-white rounded-xl ml-2 pl-2'>
+                            @foreach( $pengelola as $user )
+                                <option value={{ $user->pengelola }}>{{ $user->pengelola }}</option>
+                            @endforeach
+                        </select>
+                    @endif
 
                     <label for='sumberaset' class='ml-5'>Sumber Aset : </label>
                     <select id='sumberaset' name='sumberaset' class='ml-2 bg-black text-white pl-2 rounded-xl'>
@@ -54,8 +60,13 @@
 
             <div class='bg-local mt-10'>
                 <div class='flex flex-row justify-between'>
-                    <a href='{{ url('/input') }} ' class='ml-5 bg-blue-700 text-white p-2 rounded-xl'>Tambah Data</a>
-                    <a href='{{ url('/semuabarang/excel') }}' class='bg-green-600 rounded-xl p-2 text-white '>Download Excel</a>
+                    <div>
+                        <a href='{{ url('/input') }} ' class='ml-5 bg-blue-700 text-white p-2 rounded-xl'>Tambah Data</a>
+                    </div>
+                    <div>
+                        <a href="{{ url('/semuabarang/import') }}" class='bg-yellow-600 rounded-xl p-2 text-white mr-5'>Import Excel</a>
+                        <a href='{{ url('/semuabarang/excel') }}' class='bg-green-600 rounded-xl p-2 text-white '>Download Excel</a>
+                    </div>
                 </div>
                 <table class='table-auto mt-5'>
                     <thead>
@@ -98,7 +109,15 @@
                 <div>
                     {!! $db->links() !!}
                 </div>
-
+            <script>
+                if("{{ session('berhasil') }}"){
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data Berhasil Di Hapus',
+                        icon: 'success'
+                    })
+                }
+            </script>
             </div>
         @endif
     </div>

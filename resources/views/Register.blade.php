@@ -3,11 +3,13 @@
 <head>
     <title>Inventory | Register</title>
     <link href={{ asset('css/app.css') }} rel='stylesheet'/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 </head>
 
 <body class='flex flex-col bg-gray-300 justify-between'>
     <div class='flex flex-col place-self-center justify-center bg-white p-5 mt-5 rounded-xl shadow-xl'>
-        <img src='{{ url('/icons/box.png') }}' class='flex flex-center items-center w-12'/>
+        <img src='{{ env("IMG") }}/icons/box.png' class='flex flex-center items-center w-12'/>
     </div>
     <h1 class='text-center mt-5 text-xl'>Aplikasi Sistem Inventory</h1>
 
@@ -15,7 +17,7 @@
         <form action='{{ url('/register/data') }}' method='post' class='flex flex-col place-self-center bg-white p-5 mt-5 shadow-xl rounded-xl'>
             @csrf
             <div class='flex flex-col items-center'>
-                <img src='{{ url('/icons/box.png') }}' class='w-14'/>
+                <img src='{{ env("IMG") }}/icons/box.png' class='w-14'/>
                 <h1 class='text-center mt-5 mb-5 text-xl'>Silahkan Registrasi</h1>
             </div>
             <input type='text' name='username' placeholder='Masukkan Username' class='border-b-2 border-black'/>
@@ -33,12 +35,22 @@
             </div>
 
             <button type='submit' class='mt-5 bg-black text-white rounded-xl'>Buat</button>
-            @if(session('berhasil'))
-                <p class='mt-3 text-center text-green-800'>{{ session('berhasil') }}</p>
-            @elseif( session('gagal') )
-                <p class='mt-3 text-center text-red-700'>{{ session('gagal') }}</p>
-            @endif
-            <p class='mt-5'>Sudah punya akun ? login di <a href='{{ url('/') }}' class='text-blue-800'>sini</a></p>
+            <script>
+                if('{{ session("gagal") }}'){
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Akun sudah terdaftar',
+                        icon: 'error',
+                    })
+                }else if('{{ session("berhasil") }}'){
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Berhasil memdaftarkan akun',
+                        icon: 'success'
+                    })
+                }
+                
+            </script>
 
         </form>
     </div>

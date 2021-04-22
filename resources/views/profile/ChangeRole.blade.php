@@ -5,7 +5,7 @@
     <form action='/profile/newrole' method='post' class='flex flex-col place-self-center bg-white p-5 mt-20 rounded-xl shadow-xl'>
         @csrf
         <div class='flex flex-col items-center'>
-            <img src='/icons/profile/changerole.png' class='w-20' />
+            <img src='{{ env("IMG") }}/icons/profile/changerole.png' class='w-20' />
             <h1 class='text-xl text-center mt-5'>Ganti Role</h1>
         </div>
         

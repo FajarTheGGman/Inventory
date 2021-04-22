@@ -4,7 +4,7 @@
 
     <div class='flex flex-col place-self-center bg-white shadow-xl mt-20 p-5 rounded-xl'>
         <div class='flex items-center flex-col'>
-            <img src='{{ url('/icons/masterdata/kelompokaset.png') }} ' class='w-20' />
+            <img src='{{ env("IMG") }}/icons/masterdata/kelompokaset.png' class='w-20' />
             <h1 class='text-center text-xl bg-black rounded-xl mt-5 p-2 text-white'>Kelompok Aset</h1>
         </div>
 

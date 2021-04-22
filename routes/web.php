@@ -35,7 +35,11 @@ Route::post('/input/data', [InputController::class, 'Send']);
 Route::post('/delete/data', [DeleteController::class, 'send']);
 Route::post('/edit/data/{id}', [EditController::class, 'send']);
 Route::post('/register/data', [Home::class, 'RegisterData']);
-Route::post('/', [Home::class, 'validasi']);
+Route::post('/validasi', [Home::class, 'validasi']);
+
+Route::get('/', function(){
+    return view('HomePage');
+});
 
 // Route untuk fitur admin
 Route::post('/admin/delete/data', [AdminController::class, 'Delete']);
@@ -92,7 +96,10 @@ Route::get('/semuabarang', [Home::class, 'SemuaBarang']);
 
 // Excel
 Route::get('/semuabarang/excel', [Home::class, 'DownloadExcel']);
-Route::post('/semuabarang/import', [Home::class, 'AmbilFile']);
+Route::get('/semuabarang/import', function(){
+    return view('ImportExcel');
+});
+Route::post('/semuabarang/import/data', [Home::class, 'AmbilFile']);
 
 // Route untuk views admin
 Route::get('/admin/edit', [AdminController::class, 'EditUser']);
@@ -105,7 +112,7 @@ Route::get('/api/datapengelola', [Api::class, 'Data_Pengelola']);
 Route::get('/api/datapengelola/total', [Api::class, 'Total_Pengelola']);
 
 // Route untuk autentikasi
-Route::get('/', [Home::class, 'Login']);
+Route::get('/admin', [Home::class, 'Login']);
 Route::get('/register', [Home::class, 'Register']);
 Route::get('/logout', [Home::class, 'Logout']);
 

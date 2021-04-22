@@ -12,7 +12,7 @@
             @else
             <div class='p-10'>
                 <div class='flex flex-col justify-center items-center'>
-                    <img src='{{ url('/icons/crud/update.png') }}' class='w-14'/>
+                    <img src='{{ env("IMG") }}/icons/crud/update.png' class='w-14'/>
                     <h1 class='text-center text-xl mt-5'>Edit inventory</h1>
                 </div>
 
@@ -69,6 +69,15 @@
                     @endif
 
                 </form>
+        <script>
+          if("{{ session('berhasil') }}"){
+              Swal.fire({
+                  title: "Berhasil",
+                  text: "Berhasil Mengedit user",
+                  icon: "success"
+              })
+          }
+        </script>
             </div>
         @endif
         </div>

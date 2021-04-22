@@ -14,7 +14,7 @@ class DeleteController extends Controller
 
     public function DeleteId(Request $user, $id){
       $db = Inventory::where('id', $id)->delete();
-      return back();
+      return back()->with('berhasil', 'berhasil');
     }
 
 }
